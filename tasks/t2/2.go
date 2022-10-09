@@ -1,4 +1,4 @@
-package t2
+package main
 
 import (
 	"fmt"
@@ -32,4 +32,9 @@ func PrintCorrect() {
 	}
 	wg.Wait()
 	fmt.Println(res)
+}
+
+func main() {
+	PrintRandom()
+	PrintCorrect()
 }

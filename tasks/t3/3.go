@@ -1,4 +1,4 @@
-package t3
+package main
 
 import (
 	"fmt"
@@ -22,4 +22,8 @@ func SquareSum() {
 	}
 	wg.Wait()
 	fmt.Println(sum)
+}
+
+func main() {
+	SquareSum()
 }

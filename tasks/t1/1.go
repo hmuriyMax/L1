@@ -1,4 +1,4 @@
-package t1
+package main
 
 import "fmt"
 
@@ -27,4 +27,9 @@ func (h Human) Go(distance float64) {
 // Action cтруктура встраивает структуру Human
 type Action struct {
 	Human
+}
+
+func main() {
+	act := Action{}
+	act.Die()
 }

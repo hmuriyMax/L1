@@ -1,4 +1,4 @@
-package t4
+package main
 
 import (
 	"fmt"
@@ -35,4 +35,8 @@ func NumbersChanPrinter(numOfWorkers, numOfNums int) {
 		}
 		*channel <- str
 	}
+}
+
+func main() {
+	NumbersChanPrinter(4, 400)
 }
