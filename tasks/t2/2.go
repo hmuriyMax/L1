@@ -1,4 +1,4 @@
-package tasks
+package t2
 
 import (
 	"fmt"

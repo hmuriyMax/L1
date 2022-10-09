@@ -1,7 +1,9 @@
 package main
 
-import t "L1/tasks"
+import (
+	t "L1/tasks/t4"
+)
 
 func main() {
-	t.SquareSum()
+	t.NumbersChanPrinter(4, 400)
 }
