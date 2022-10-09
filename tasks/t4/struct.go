@@ -2,6 +2,7 @@ package t4
 
 import (
 	"fmt"
+	"log"
 	"sync"
 )
 
@@ -19,7 +20,7 @@ func (cp *ChannelPrinter) Launch() {
 	}
 	for i := 0; i < cp.Num; i++ {
 		cp.wg.Add(1)
-		//log.Printf("Launching worker %d", i)
+		log.Printf("Launching worker %d", i)
 		go cp.worker()
 	}
 }
@@ -40,7 +41,7 @@ func (cp *ChannelPrinter) worker() {
 		select {
 		case data, ok := <-cp.ch:
 			if !ok {
-				//log.Printf("Worker stopped")
+				log.Printf("Worker stopped")
 				return
 			} else {
 				fmt.Println(data)
