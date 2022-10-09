@@ -1,8 +1,8 @@
 package main
 
-import "L1/tasks"
+import t "L1/tasks"
 
 func main() {
-	act := tasks.Action{}
-	act.Die()
+	t.PrintRandom()
+	t.PrintCorrect()
 }
