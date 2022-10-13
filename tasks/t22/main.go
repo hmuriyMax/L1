@@ -2,74 +2,47 @@ package main
 
 import (
 	"fmt"
-	"strings"
+	"math/big"
 )
 
 type LongInt struct {
 	num string
 }
 
-func Reverse(s string) string {
-	runes := []rune(s)
-	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
-		runes[i], runes[j] = runes[j], runes[i]
-	}
-	return string(runes)
+func Sum(lhs, rhs LongInt) (res LongInt) {
+	var sum, num1, num2 big.Int
+	num1.SetString(lhs.num, 10)
+	num2.SetString(rhs.num, 10)
+	sum.Add(&num1, &num2)
+	return LongInt{num: sum.Text(10)}
 }
 
-var (
-	numToRune = []rune{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}
-)
-
-func runeToNum(r rune) int {
-	for i, el := range numToRune {
-		if el == r {
-			return i
-		}
-	}
-	return -1
+func Minus(lhs, rhs LongInt) (res LongInt) {
+	var sum, num1, num2 big.Int
+	num1.SetString(lhs.num, 10)
+	num2.SetString(rhs.num, 10)
+	sum.Sub(&num1, &num2)
+	return LongInt{num: sum.Text(10)}
 }
 
-func tinySum(lhs, rhs rune) (this, promise rune) {
-	lInt := runeToNum(lhs)
-	rInt := runeToNum(rhs)
-	tInt := lInt + rInt
-	this = numToRune[tInt%10]
-	promise = numToRune[tInt/10]
-	return
+func Multiply(lhs, rhs LongInt) (res LongInt) {
+	var mult, num1, num2 big.Int
+	num1.SetString(lhs.num, 10)
+	num2.SetString(rhs.num, 10)
+	mult.Mul(&num1, &num2)
+	return LongInt{num: mult.Text(10)}
 }
 
-func Sum(lhs, rhs *LongInt) (res *LongInt) {
-	//var maxLen int
-	if len(lhs.num) > len(rhs.num) {
-		delta := len(lhs.num) - len(rhs.num)
-		rhs.num = strings.Repeat("0", delta) + rhs.num
-	} else {
-		delta := len(rhs.num) - len(lhs.num)
-		lhs.num = strings.Repeat("0", delta) + lhs.num
-	}
-
-	num1 := Reverse(lhs.num)
-	num2 := Reverse(rhs.num)
-
-	var this, prom, nprom rune
-	for i := 0; i < len(num1); i++ {
-		this, prom = tinySum(rune(num1[i]), numToRune[prom])
-		this, nprom = tinySum(this, rune(num2[i]))
-		prom += nprom
-		res.num += fmt.Sprint(this)
-	}
-	if prom != '0' {
-		res.num += fmt.Sprint(this)
-	}
-	return
-}
-
-func Multiply(lhs, rhs *LongInt) (res *LongInt) {
-
-	return
+func Divide(lhs, rhs LongInt) (res LongInt) {
+	var div, num1, num2 big.Int
+	num1.SetString(lhs.num, 10)
+	num2.SetString(rhs.num, 10)
+	div.Div(&num1, &num2)
+	return LongInt{num: div.Text(10)}
 }
 
 func main() {
-
+	a := LongInt{"1000000000000000000000000000"}
+	b := LongInt{"2"}
+	fmt.Println(Divide(a, b).num)
 }
